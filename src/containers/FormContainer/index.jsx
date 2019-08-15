@@ -16,37 +16,18 @@ export const Wrapper = styled.div`
 `;
 
 class FormContainer extends Component {
-    state = {
-        l_name: ''
-    };
 
-    componentDidMount() {
-        const { name } = this.props;
-        this.setState({l_name: name})
-    }
-    handleEdit = e => {
-        this.setState({l_name: e.target.value});
-    };
-    handleClick = () => {
-        const { l_name } = this.state;
-        this.props.fetchData(l_name)
-    };
-
-    render() {
-        const { handleEdit, handleClick } = this;
-        const { message } = this.props;
-        const { l_name } = this.state;
-        const { fetchData, getUsers } = this.props;
-        return (
-          <Wrapper padding='150px'>
-              <Title title='Add User'/>
-              <input onChange={ handleEdit } value={l_name}/>
-              <button type='button' onClick={handleClick}>Press me</button>
-            <FormComponent fetchData={fetchData} getUsers={getUsers}/>
-            <Message message={message}/>
-          </Wrapper>
-        );
-    }
+  render() {
+    const { message } = this.props;
+    const { fetchData, getUsers } = this.props;
+    return (
+      <Wrapper padding='150px'>
+        <Title title='Add User'/>
+        <FormComponent fetchData={fetchData} getUsers={getUsers}/>
+        <Message message={message}/>
+      </Wrapper>
+    );
+  }
 }
 
 export default FormContainer;

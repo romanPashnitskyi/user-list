@@ -1,6 +1,6 @@
 import {AddUsersRequest, UsersRequest} from '../../store/actions/users.actions';
 import {connect} from 'react-redux';
-import FormContainer from '.'
+import FormContainer from '.';
 
 const mapStateToProps = (state) => {
     return {
