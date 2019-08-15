@@ -54,8 +54,8 @@ class FormComponent extends Component {
         initialValues={{ name: '' }}
         validate={values => {
           let errors = {};
-          if (!values.name) {
-            errors.name = 'Required';
+          if (values.name.length >= 15) {
+            errors.name = 'The length of the name is too large';
           }
           return errors;
         }}

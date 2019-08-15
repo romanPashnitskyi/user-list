@@ -34,7 +34,7 @@ class FormContainer extends Component {
 
     render() {
         const { handleEdit, handleClick } = this;
-        const { name, message } = this.props;
+        const { message } = this.props;
         const { l_name } = this.state;
         const { fetchData, getUsers } = this.props;
         return (
