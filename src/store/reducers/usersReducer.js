@@ -1,7 +1,7 @@
 const initialState = {
   name: '',
   error: null,
-  message: false
+  message: null
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -13,12 +13,14 @@ const usersReducer = (state = initialState, action) => {
     case 'ADD_USERS_SUCCESS':
       return {
         ...state,
-        name: action.payload.name
+        name: action.payload.name,
+        message: true
       };
     case 'ADD_USERS_FAILURE':
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
+        message: false
       };
     case 'FETCH_DATA_FULFILLED':
       return {

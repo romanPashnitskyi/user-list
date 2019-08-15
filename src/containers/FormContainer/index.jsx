@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 import Title from '../../components/Title';
+import Message from '../../components/Message';
 
 export const Wrapper = styled.div`
     height: 20vh;
@@ -33,7 +34,7 @@ class FormContainer extends Component {
 
     render() {
         const { handleEdit, handleClick } = this;
-        const { name, error, message } = this.props;
+        const { name, message } = this.props;
         const { l_name } = this.state;
         const { fetchData } = this.props;
         return (
@@ -60,6 +61,7 @@ class FormContainer extends Component {
                     </Form>
                   )}
               </Formik>
+            <Message message={message}/>
           </Wrapper>
         );
     }
