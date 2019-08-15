@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 import Title from '../../components/Title';
 import Message from '../../components/Message';
+import FormComponent from '../../components/FormComponent'
 
 export const Wrapper = styled.div`
     height: 20vh;
@@ -43,24 +43,7 @@ class FormContainer extends Component {
               <input onChange={ handleEdit } value={l_name}/>
               <button type='button' onClick={handleClick}>Press me</button>
               Hello {name}!
-              <Formik
-                initialValues={{ name: '' }}
-                onSubmit={(values, actions) => {
-                  fetchData(values);
-                  actions.setSubmitting(false);
-                  actions.resetForm({ name: '' });
-                }}
-              >
-                  {({ isSubmitting, handleSubmit }) => (
-                    <Form>
-                        <Field type="text" name="name" />
-                        <ErrorMessage name="email" component="div" />
-                        <button type="button" onClick={handleSubmit} disabled={isSubmitting}>
-                            Submit
-                        </button>
-                    </Form>
-                  )}
-              </Formik>
+            <FormComponent fetchData={fetchData}/>
             <Message message={message}/>
           </Wrapper>
         );

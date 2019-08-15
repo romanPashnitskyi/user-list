@@ -13,7 +13,7 @@ const Message = (props) => {
       {
         props.message === null ? '' : props.message
           ? <p style={{color: 'limegreen'}}>User added!</p>
-          : <p style={{color: 'red'}}>Error</p>
+          : <p style={{color: 'red'}}>Error!This username already exists!</p>
       }
     </MessageWrapper>
   )
