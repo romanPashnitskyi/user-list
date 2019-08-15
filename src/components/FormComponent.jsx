@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import styled from 'styled-components';
 import {Formik} from "formik";
 
@@ -39,43 +39,51 @@ export const Text = styled.p`
   color: ${props => props.color || '#4d4d4d'}
 `;
 
+class FormComponent extends Component {
+  handleSubmit = (values) => {
+    this.props.fetchData(values);
+  };
 
+  componentDidUpdate() {
+    this.props.getUsers();
+  }
 
-const FormComponent = (props) => {
+  render() {
     return(
       <Formik
         initialValues={{ name: '' }}
         validate={values => {
-            let errors = {};
-            if (!values.name) {
-                errors.name = 'Required';
-            }
-            return errors;
+          let errors = {};
+          if (!values.name) {
+            errors.name = 'Required';
+          }
+          return errors;
         }}
         onSubmit={(values, actions) => {
-            props.fetchData(values);
-            actions.setSubmitting(false);
-            actions.resetForm({ name: '' });
+          this.handleSubmit(values);
+          actions.setSubmitting(false);
+          actions.resetForm({ name: '' });
         }}
       >
-          {({ isSubmitting, handleSubmit, handleChange, values, errors}) => (
-            <Form onSubmit={handleSubmit}>
-                <Label>
-                    {errors.name && <Text color="red">{errors.name}</Text>}
-                    <Input
-                      type="text"
-                      name="name"
-                      values={values.name}
-                      onChange={handleChange}
-                      placeholder="Name"
-                      border={errors.name && '1px solid red'}
-                />
-                </Label>
-                <Button type="submit" disabled={isSubmitting}>Add</Button>
-            </Form>
-          )}
+        {({ isSubmitting, handleSubmit, handleChange, values, errors}) => (
+          <Form onSubmit={handleSubmit}>
+            <Label>
+              {errors.name && <Text color="red">{errors.name}</Text>}
+              <Input
+                type="text"
+                name="name"
+                values={values.name}
+                onChange={handleChange}
+                placeholder="Name"
+                border={errors.name && '1px solid red'}
+              />
+            </Label>
+            <Button type="submit" disabled={isSubmitting}>Add</Button>
+          </Form>
+        )}
       </Formik>
     )
+  }
 };
 
 export default FormComponent;

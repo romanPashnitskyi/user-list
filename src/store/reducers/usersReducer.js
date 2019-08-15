@@ -1,4 +1,5 @@
 const initialState = {
+  users: [],
   name: '',
   error: null,
   message: null
@@ -6,6 +7,20 @@ const initialState = {
 
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'USERS_REQUEST':
+      return {
+        ...state
+      };
+    case 'USERS_SUCCESS':
+      return {
+        ...state,
+        users: [...action.payload]
+      };
+    case 'USERS_FAILURE':
+      return {
+        ...state,
+        error: action.payload
+      };
     case 'ADD_USERS_REQUEST':
       return {
         ...state

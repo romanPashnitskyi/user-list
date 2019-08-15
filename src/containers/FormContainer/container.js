@@ -1,4 +1,4 @@
-import { AddUsersRequest } from '../../store/actions/users.actions';
+import {AddUsersRequest, UsersRequest} from '../../store/actions/users.actions';
 import {connect} from 'react-redux';
 import FormContainer from '.'
 
@@ -11,7 +11,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (user) => dispatch(AddUsersRequest(user))
+        fetchData: (user) => dispatch(AddUsersRequest(user)),
+        getUsers: () => dispatch(UsersRequest())
     }
 };
 

@@ -1,18 +1,16 @@
-import {fetchData} from "../../store/actions/users.actions";
+import {UsersRequest} from '../../store/actions/users.actions';
 import {connect} from 'react-redux';
 import Users from '.'
 
 const mapStateToProps = (state) => {
   return {
-    name: state.users.name
+    users: state.users.users
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchData: (name) => {
-      dispatch(fetchData(name))
-    }
+    getUsers: () => dispatch(UsersRequest())
   }
 };
 

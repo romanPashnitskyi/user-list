@@ -36,14 +36,13 @@ class FormContainer extends Component {
         const { handleEdit, handleClick } = this;
         const { name, message } = this.props;
         const { l_name } = this.state;
-        const { fetchData } = this.props;
+        const { fetchData, getUsers } = this.props;
         return (
           <Wrapper padding='150px'>
               <Title title='Add User'/>
               <input onChange={ handleEdit } value={l_name}/>
               <button type='button' onClick={handleClick}>Press me</button>
-              Hello {name}!
-            <FormComponent fetchData={fetchData}/>
+            <FormComponent fetchData={fetchData} getUsers={getUsers}/>
             <Message message={message}/>
           </Wrapper>
         );

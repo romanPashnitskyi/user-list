@@ -33,6 +33,27 @@ export const fetchData = (name, error, message) => dispatch => {
   data.error = null;
 };
 
+export const UsersRequest = () => {
+  return {
+    type: 'USERS_REQUEST',
+    payload: null
+  };
+};
+
+export const UsersSuccess = data => {
+  return {
+    type: 'USERS_SUCCESS',
+    payload: data
+  };
+};
+
+export const UserFailure = err => {
+  return {
+    type: 'USERS_FAILURE',
+    payload: err
+  };
+};
+
 export const AddUsersRequest = user => {
   return {
     type: 'ADD_USERS_REQUEST',
@@ -53,4 +74,3 @@ export const AddUserFailure = err => {
     payload: err
   };
 };
-
