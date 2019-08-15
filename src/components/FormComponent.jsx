@@ -44,6 +44,10 @@ class FormComponent extends Component {
     this.props.fetchData(values);
   };
 
+  componentDidMount() {
+    this.props.getUsers();
+  }
+
   componentDidUpdate() {
     this.props.getUsers();
   }
