@@ -19,11 +19,11 @@ class FormContainer extends Component {
 
   render() {
     const { message } = this.props;
-    const { fetchData, getUsers } = this.props;
+    const { addUsers, getUsers } = this.props;
     return (
       <Wrapper padding='150px'>
         <Title title='Add User'/>
-        <FormComponent fetchData={fetchData} getUsers={getUsers}/>
+        <FormComponent addUsers={addUsers} getUsers={getUsers}/>
         <Message message={message}/>
       </Wrapper>
     );

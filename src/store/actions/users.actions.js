@@ -1,38 +1,3 @@
-let data = {};
-
-export const fetchData = (name, error, message) => dispatch => {
-  data.name = name;
-
-  fetch(`http://localhost:8081/api/user`, {
-    method: 'POST',
-    body: JSON.stringify({
-      name: name
-    }),
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-  }).then(response  => {
-    if (!response.ok) {
-      throw new Error();
-    }
-  }).then(response  => {
-    data.message = true;
-    dispatch({
-      type: 'FETCH_DATA_FULFILLED',
-      payload: data
-    })
-  }).catch(error => {
-    data.error = true;
-    dispatch({
-      type: 'FETCH_DATA_REJECTED',
-      payload: data
-    });
-  });
-
-  data.error = null;
-};
-
 export const UsersRequest = () => {
   return {
     type: 'USERS_REQUEST',
@@ -71,6 +36,48 @@ export const AddUsersSuccess = user => {
 export const AddUserFailure = err => {
   return {
     type: 'ADD_USERS_FAILURE',
+    payload: err
+  };
+};
+
+export const DeleteUsersRequest = user => {
+  return {
+    type: 'DELETE_USERS_REQUEST',
+    payload: user
+  };
+};
+
+export const DeleteUsersSuccess = user => {
+  return {
+    type: 'DELETE_USERS_SUCCESS',
+    payload: user
+  };
+};
+
+export const DeleteUserFailure = err => {
+  return {
+    type: 'DELETE_USERS_FAILURE',
+    payload: err
+  };
+};
+
+export const EditUsersRequest = (id, name) => {
+  return {
+    type: 'EDIT_USERS_REQUEST',
+    payload: {id, name}
+  };
+};
+
+export const EditUsersSuccess = user => {
+  return {
+    type: 'EDIT_USERS_SUCCESS',
+    payload: user
+  };
+};
+
+export const EditUserFailure = err => {
+  return {
+    type: 'EDIT_USERS_FAILURE',
     payload: err
   };
 };

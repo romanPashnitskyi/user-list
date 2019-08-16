@@ -1,4 +1,4 @@
-import {UsersRequest} from '../../store/actions/users.actions';
+import {UsersRequest, DeleteUsersRequest, EditUsersRequest} from '../../store/actions/users.actions';
 import {connect} from 'react-redux';
 import Users from '.'
 
@@ -10,7 +10,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getUsers: () => dispatch(UsersRequest())
+    getUsers: () => dispatch(UsersRequest()),
+    deleteUsers: (user) => dispatch(DeleteUsersRequest(user)),
+    editUsers: (id, user) => dispatch(EditUsersRequest(id, user))
   }
 };
 

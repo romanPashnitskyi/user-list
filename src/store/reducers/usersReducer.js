@@ -37,6 +37,34 @@ const usersReducer = (state = initialState, action) => {
         error: action.payload,
         message: false
       };
+    case 'DELETE_USERS_REQUEST':
+      return  {
+        ...state
+      };
+    case 'DELETE_USERS_SUCCESS':
+      return {
+        ...state,
+        users: [...state.users.filter(user => action.payload !== user._id)]
+      };
+    case 'DELETE_USERS_FAILURE':
+      return {
+        ...state,
+        error: action.payload
+      };
+    case 'EDIT_USERS_REQUEST':
+      return  {
+        ...state
+      };
+    case 'EDIT_USERS_SUCCESS':
+      return  {
+        ...state,
+        users: [...state.users.map(user => action.payload._id === user._id ? user = action.payload : user)]
+      };
+    case 'EDIT_USERS_FAILURE':
+      return {
+        ...state,
+        error: action.payload
+      };
     case 'FETCH_DATA_FULFILLED':
       return {
         ...state,
