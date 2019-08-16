@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import {Formik} from "formik";
+import {Formik} from 'formik';
 
 export const Form = styled.form`
   width: 250px;
@@ -24,7 +24,7 @@ export const Button = styled.button`
   border-radius: 3px;
 `;
 
-const Label = styled.label`
+export const Label = styled.label`
   display: flex;
   flex-direction: column;
   color: #777;
@@ -41,7 +41,7 @@ export const Text = styled.p`
 
 class FormComponent extends Component {
   handleSubmit = (values) => {
-    this.props.fetchData(values);
+    this.props.addUsers(values);
   };
 
   componentDidMount() {
@@ -59,7 +59,7 @@ class FormComponent extends Component {
         validate={values => {
           let errors = {};
           if (values.name.length >= 15) {
-            errors.name = 'The length of the name is too large';
+            errors.name = 'The length of the name is too long';
           }
           return errors;
         }}
