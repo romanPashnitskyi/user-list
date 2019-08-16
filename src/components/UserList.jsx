@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import User from './User';
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const List = styled.li`
   list-style-type: none;
@@ -10,13 +10,14 @@ const List = styled.li`
 class UserList extends Component {
 
   render() {
-    const { users } = this.props;
+    const { users, deleteUser, getUsers, editUsers } = this.props;
     return (
       <div>
         {
           users.map((user, index) =>
           <List key={user._id}>
-            <User user={user}/>
+            <User users={users} user={user} getUsers={getUsers}
+                  deleteUser={deleteUser} editUsers={editUsers} />
           </List>
           )
         }
