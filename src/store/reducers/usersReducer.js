@@ -2,7 +2,8 @@ const initialState = {
   users: [],
   name: '',
   error: null,
-  message: null
+  message: null,
+  loading: false
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -53,11 +54,13 @@ const usersReducer = (state = initialState, action) => {
       };
     case 'EDIT_USERS_REQUEST':
       return  {
-        ...state
+        ...state,
+        loading: true
       };
     case 'EDIT_USERS_SUCCESS':
       return  {
         ...state,
+        loading: false,
         users: [...state.users.map(user => action.payload._id === user._id ? user = action.payload : user)]
       };
     case 'EDIT_USERS_FAILURE':

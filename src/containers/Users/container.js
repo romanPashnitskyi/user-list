@@ -4,7 +4,8 @@ import Users from '.'
 
 const mapStateToProps = (state) => {
   return {
-    users: state.users.users
+    users: state.users.users,
+    loading: state.users.loading
   }
 };
 

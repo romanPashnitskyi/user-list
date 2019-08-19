@@ -66,11 +66,10 @@ class FormComponent extends Component {
         onSubmit={(values, actions) => {
           this.handleSubmit(values);
           actions.setSubmitting(false);
-          actions.resetForm({ name: '' });
         }}
       >
-        {({ isSubmitting, handleSubmit, handleChange, values, errors}) => (
-          <Form onSubmit={handleSubmit}>
+        {({ handleSubmit, handleChange, values, errors}) => (
+          <Form onSubmit={(e) => handleSubmit(e)}>
             <Label>
               {errors.name && <Text color="red">{errors.name}</Text>}
               <Input
@@ -82,7 +81,7 @@ class FormComponent extends Component {
                 border={errors.name && '1px solid red'}
               />
             </Label>
-            <Button type="submit" disabled={isSubmitting}>Add</Button>
+            <Button type='submit' onClick={(e) => handleSubmit(e)}>Add</Button>
           </Form>
         )}
       </Formik>

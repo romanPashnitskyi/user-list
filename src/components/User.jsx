@@ -7,7 +7,6 @@ import {Formik} from 'formik';
 
 const UserForm = styled.form`
   width: 166px;
-  margin-right: 15px
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -23,7 +22,7 @@ const UserWrapper = styled.div`
 `;
 
 const UserName = styled.div`
-  width: 200px;
+  width: 220px;
   font-size: 1em;
   text-align: left;
 `;
@@ -31,7 +30,8 @@ const UserName = styled.div`
 const Button = styled.div`
   display: flex;
   flex-direction: row;
-  width: 30px;
+  padding-left: ${props => props.padding || '0'};
+  margin-left: ${props => props.margin || '0'};
   font-size: 1em;
   text-align: left;
 `;
@@ -76,65 +76,59 @@ class User extends Component {
   };
 
   render() {
-    const { user } = this.props;
+    const { user, loading } = this.props;
     const initialValues = {name: user.name};
     return (
-      <UserWrapper>
-        <UserName>
-        {this.state.edit ?
-          <Formik
-            initialValues={initialValues}
-            validate={values => {
-              let errors = {};
-              if (values.name.length >= 15) {
-                errors.name = 'The length of the name is too long.';
-              } else if (values.name.length === 0 || values.name === '0') {
-                errors.name = 'Please, type your name.';
-              }
-              return errors;
-            }}
-            onSubmit={(values) => {
-              this.handleSubmit(values);
-            }}
-          >
-            {({ isSubmitting, handleSubmit, handleChange, values, errors}) => (
-              <UserForm onSubmit={handleSubmit}>
-                <Label>
-                  {errors.name && <Text color="red">{errors.name}</Text>}
-                  <Input
-                    type="text"
-                    name="name"
-                    value={values.name}
-                    onChange={handleChange}
-                    onSubmit={handleSubmit}
-                    placeholder="Name"
-                  />
-                </Label>
-                <Button type='button'
-                        onClick={(e) => handleSubmit(e)}>
-                  <Done />
-                </Button>
-              </UserForm>
-            )}
-          </Formik> : user.name}
-        </UserName>
-        {
-          this.state.edit
-            ? ''
-            : <Button>
-                <Edit onClick={event => this.handleEdit()}/>
-              </Button>
-        }
-        {
-          this.state.edit
-            ? <Button>
-                <Cancel onClick={event => this.handleCancel()}/>
-              </Button>
-            : <Button>
-                <Delete onClick={event => this.handleDelete(user)}/>
-              </Button>
-        }
-      </UserWrapper>
+        <UserWrapper>
+          <UserName>
+            {loading
+                ? (loading ? <p>Loading...</p> : '' ? user.name : '')
+                : (this.state.edit ?
+                    <Formik
+                        initialValues={initialValues}
+                        validate={values => {
+                          let errors = {};
+                          if (values.name.length >= 15) {
+                            errors.name = 'The length of the name is too long.';
+                          } else if (values.name.length === 0 || values.name === '0') {
+                            errors.name = 'Please, type your name.';
+                          }
+                          return errors;
+                        }}
+                        onSubmit={(values) => {
+                          this.handleSubmit(values);
+                        }}
+                    >
+                      {({ isSubmitting, handleSubmit, handleChange, values, errors}) => (
+                          <UserForm onSubmit={handleSubmit}>
+                            <Label>
+                              {errors.name && <Text color="red">{errors.name}</Text>}
+                              <Input
+                                  type="text"
+                                  name="name"
+                                  value={values.name}
+                                  onChange={handleChange}
+                                  onSubmit={handleSubmit}
+                                  placeholder="Name"
+                              />
+                            </Label>
+                            <Button padding='55px'><Done type='button' onClick={(e) => handleSubmit(e)}/></Button>
+                          </UserForm>
+                      )}
+                    </Formik> : user.name)
+            }
+          </UserName>
+          {
+            this.state.edit
+                ? ''
+                : <Button><Edit onClick={event => this.handleEdit()}/></Button>
+          }
+          {
+            this.state.edit
+                ? <Button margin='25px'><Cancel onClick={event => this.handleCancel()}/></Button>
+                : <Button><Delete onClick={event => this.handleDelete(user)}/></Button>
+          }
+        </UserWrapper>
 
     )
   }
