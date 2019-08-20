@@ -8,11 +8,11 @@ class Users extends Component {
 
 
     render() {
-        const { getUsers, deleteUsers, editUsers, loading } = this.props;
+        const { users, getUsers, deleteUsers, editUsers, loading } = this.props;
         return (
             <Wrapper padding='80px'>
                 <Title title='User List' />
-                <UserList getUsers={getUsers} users={this.props.users} loading={loading}
+                <UserList getUsers={getUsers} users={users} loading={loading}
                           deleteUser={deleteUsers} editUsers={editUsers}/>
             </Wrapper>
         );

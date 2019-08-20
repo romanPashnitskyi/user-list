@@ -55,7 +55,7 @@ class FormComponent extends Component {
     render() {
         return(
             <Formik
-                initialValues={{ name: '' }}
+                initialValues={{ name: '', password: '' }}
                 validate={values => {
                     let errors = {};
                     if (values.name.length >= 15) {

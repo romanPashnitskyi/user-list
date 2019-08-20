@@ -19,10 +19,10 @@ export const UserFailure = err => {
   };
 };
 
-export const AddUsersRequest = user => {
+export const AddUsersRequest = (values) => {
   return {
     type: 'ADD_USERS_REQUEST',
-    payload: user
+    payload: {name: values.name, password: values.password}
   };
 };
 
