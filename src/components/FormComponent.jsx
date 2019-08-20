@@ -40,53 +40,53 @@ export const Text = styled.p`
 `;
 
 class FormComponent extends Component {
-  handleSubmit = (values) => {
-    this.props.addUsers(values);
-  };
+    handleSubmit = (values) => {
+        this.props.addUsers(values);
+    };
 
-  componentDidMount() {
-    this.props.getUsers();
-  }
+    componentDidMount() {
+        this.props.getUsers();
+    }
 
-  componentDidUpdate() {
-    this.props.getUsers();
-  }
+    componentDidUpdate() {
+        this.props.getUsers();
+    }
 
-  render() {
-    return(
-      <Formik
-        initialValues={{ name: '' }}
-        validate={values => {
-          let errors = {};
-          if (values.name.length >= 15) {
-            errors.name = 'The length of the name is too long';
-          }
-          return errors;
-        }}
-        onSubmit={(values, actions) => {
-          this.handleSubmit(values);
-          actions.setSubmitting(false);
-        }}
-      >
-        {({ handleSubmit, handleChange, values, errors}) => (
-          <Form onSubmit={(e) => handleSubmit(e)}>
-            <Label>
-              {errors.name && <Text color="red">{errors.name}</Text>}
-              <Input
-                type="text"
-                name="name"
-                values={values.name}
-                onChange={handleChange}
-                placeholder="Name"
-                border={errors.name && '1px solid red'}
-              />
-            </Label>
-            <Button type='submit' onClick={(e) => handleSubmit(e)}>Add</Button>
-          </Form>
-        )}
-      </Formik>
-    )
-  }
+    render() {
+        return(
+            <Formik
+                initialValues={{ name: '' }}
+                validate={values => {
+                    let errors = {};
+                    if (values.name.length >= 15) {
+                        errors.name = 'The length of the name is too long';
+                    }
+                    return errors;
+                }}
+                onSubmit={(values, actions) => {
+                    this.handleSubmit(values);
+                    actions.setSubmitting(false);
+                }}
+            >
+                {({ handleSubmit, handleChange, values, errors}) => (
+                    <Form onSubmit={(e) => handleSubmit(e)}>
+                        <Label>
+                            {errors.name && <Text color="red">{errors.name}</Text>}
+                            <Input
+                                type="text"
+                                name="name"
+                                values={values.name}
+                                onChange={handleChange}
+                                placeholder="Name"
+                                border={errors.name && '1px solid red'}
+                            />
+                        </Label>
+                        <Button type='submit' onClick={(e) => handleSubmit(e)}>Add</Button>
+                    </Form>
+                )}
+            </Formik>
+        )
+    }
 };
 
 export default FormComponent;
