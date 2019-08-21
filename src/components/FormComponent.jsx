@@ -81,6 +81,13 @@ class FormComponent extends Component {
                                 placeholder="Name"
                                 border={errors.name && '1px solid red'}
                             />
+                            <Input
+                                type="password"
+                                name="password"
+                                values={values.password}
+                                onChange={handleChange}
+                                placeholder="Password"
+                            />
                         </Label>
                         <Button type='submit' onClick={(e) => handleSubmit(e)}>Add</Button>
                     </Form>
