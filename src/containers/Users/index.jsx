@@ -4,8 +4,13 @@ import { Wrapper } from '../FormContainer';
 import UserList from '../../components/UserList';
 import Title from '../../components/Title';
 import {Button} from '../../components/FormComponent';
+import {connectSocket} from "../../store/soccet.wrapper";
 
 class Users extends Component {
+
+    componentDidMount() {
+        connectSocket();
+    }
 
     handleLogout = () => {
         this.props.logout();
