@@ -17,10 +17,11 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
-  width: 230px;
+  width: ${props => props.width || '230px' };
   height: 35px;
-  background-color: #5995ef;
+  margin-left: ${props => props.margin || '0' };
   color: #fff;
+  background-color: #5995ef;
   border-radius: 3px;
 `;
 

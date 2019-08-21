@@ -19,37 +19,9 @@ export const LoginFailure = err => {
     };
 };
 
-export const TokenRequest = code => {
-    return {
-        type: 'TOKEN_REQUEST',
-        payload: code
-    };
-};
-
-export const TokenSuccess = data => {
-    return {
-        type: 'TOKEN_SUCCESS',
-        payload: data
-    };
-};
-
-export const TokenFailure = err => {
-    return {
-        type: 'TOKEN_FAILURE',
-        payload: err
-    };
-};
-
 export const LogoutRequest = () => {
     return {
         type: 'LOGOUT_REQUEST',
         payload: null
-    };
-};
-
-export const SetUserRequest = data => {
-    return {
-        type: 'SET_USER_REQUEST',
-        payload: data
     };
 };

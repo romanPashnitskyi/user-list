@@ -1,6 +1,5 @@
 const initialState = {
   redirectUrl: '',
-  code: '',
   user: null,
   id_token: ''
 };
@@ -11,44 +10,23 @@ const authReducer = (state = initialState, action) => {
       return { ...state };
     }
     case 'LOGIN_SUCCESS': {
-      localStorage.setItem('token', action.payload);
+      localStorage.setItem('token', action.payload.data.token);
       return {
         ...state,
         redirectUrl: '/app',
-        id_token: action.payload.id_token
+        id_token: action.payload.data.token,
+        user: action.payload.data.user.name
       };
     }
     case 'LOGIN_FAILURE': {
       return { ...state, error: action.payload };
     }
-    case 'TOKEN_REQUEST': {
-      return { ...state };
-    }
-    case 'TOKEN_SUCCESS': {
-      localStorage.setItem('token', action.payload.tokens.id_token);
-      localStorage.setItem('g_user', JSON.stringify(action.payload.user));
-      return {
-        ...state,
-        user: action.payload.user,
-        id_token: action.payload.id_token
-      };
-    }
-    case 'TOKEN_FAILURE': {
-      return { ...state, error: action.payload };
-    }
     case 'LOGOUT_REQUEST': {
       localStorage.removeItem('token');
-      localStorage.removeItem('g_user');
       return {
         ...state,
         user: null,
         id_token: null
-      };
-    }
-    case 'SET_USER_REQUEST': {
-      return {
-        ...state, 
-        user: action.payload
       };
     }
     default:

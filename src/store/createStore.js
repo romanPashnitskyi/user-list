@@ -40,17 +40,3 @@ axios.interceptors.request.use(
     }
 );
 
-axios.interceptors.response.use(
-    undefined,
-    function(err) {
-        switch(err.response.status) {
-            case 401: {
-                localStorage.removeItem('g_user');
-                localStorage.removeItem('token');
-                window.location.replace('/account/login');
-                break;
-            }
-        }
-        return Promise.reject(err);
-    }
-);

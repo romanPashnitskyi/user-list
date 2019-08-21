@@ -1,6 +1,6 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
-import { LoginFailure, LoginSuccess, LogoutRequest, TokenFailure, TokenSuccess } from '../actions/auth.actions';
-import { oauth, token } from '../services/auth.service';
+import { LoginFailure, LoginSuccess, LogoutRequest } from '../actions/auth.actions';
+import { oauth } from '../services/auth.service';
 
 function* login(request) {
     try {
@@ -12,18 +12,8 @@ function* login(request) {
     }
 }
 
-function* tokenRequest(request) {
-    try {
-        const data = yield call(token, request.payload);
-        yield put(TokenSuccess(data));
-    } catch (err) {
-        yield put(TokenFailure(err));
-    }
-}
-
 export function* authSaga() {
     yield all([
-        takeEvery('LOGIN_REQUEST', login),
-        takeEvery('TOKEN_REQUEST', tokenRequest)
+        takeEvery('LOGIN_REQUEST', login)
     ]);
 }
