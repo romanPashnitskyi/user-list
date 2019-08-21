@@ -5,6 +5,14 @@ import { Edit, Delete, Done, Cancel } from '@material-ui/icons';
 import { Label, Text} from './FormComponent';
 import {Formik} from 'formik';
 
+const Wrapper = styled.div`
+  width: 270px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1em;
+`;
+
 const UserForm = styled.form`
   width: 166px;
   display: flex;
@@ -13,7 +21,6 @@ const UserForm = styled.form`
 `;
 
 const UserWrapper = styled.div`
-  width: 300px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -46,18 +53,36 @@ export const Input = styled.input`
   background-color: #fff;
 `;
 
+const DeleteError = styled.p`
+  color: red;
+  font-size: 1em;
+  padding-top: 10px;
+`;
+
 class User extends Component {
 
   constructor(...args) {
     super(...args);
 
     this.state = {
-      edit: false
+      edit: false,
+      deleteError: false
     };
   }
 
   handleDelete = (user) =>  {
-    this.props.deleteUser(user);
+    if (this.props.authUser !== user.name) {
+      this.props.deleteUser(user);
+    } else {
+      this.setState({
+        deleteError: true
+      });
+      setTimeout(() => {
+        this.setState({
+          deleteError: false
+        });
+      }, 2000);
+    }
   };
 
   handleEdit = () => {
@@ -79,57 +104,61 @@ class User extends Component {
     const { user, loading } = this.props;
     const initialValues = {name: user.name};
     return (
-        <UserWrapper>
-          <UserName>
-            {loading
-                ? (loading ? <p>Loading...</p> : '' ? user.name : '')
-                : (this.state.edit ?
-                    <Formik
-                        initialValues={initialValues}
-                        validate={values => {
-                          let errors = {};
-                          if (values.name.length >= 15) {
-                            errors.name = 'The length of the name is too long.';
-                          } else if (values.name.length === 0 || values.name === '0') {
-                            errors.name = 'Please, type your name.';
-                          }
-                          return errors;
-                        }}
-                        onSubmit={(values) => {
-                          this.handleSubmit(values);
-                        }}
-                    >
-                      {({ isSubmitting, handleSubmit, handleChange, values, errors}) => (
-                          <UserForm onSubmit={handleSubmit}>
-                            <Label>
-                              {errors.name && <Text color="red">{errors.name}</Text>}
-                              <Input
-                                  type="text"
-                                  name="name"
-                                  value={values.name}
-                                  onChange={handleChange}
-                                  onSubmit={handleSubmit}
-                                  placeholder="Name"
-                              />
-                            </Label>
-                            <Button padding='55px'><Done type='button' onClick={(e) => handleSubmit(e)}/></Button>
-                          </UserForm>
-                      )}
-                    </Formik> : user.name)
+        <Wrapper>
+          <UserWrapper>
+            <UserName>
+              {loading
+                  ? (loading ? <p>Loading...</p> : '' ? user.name : '')
+                  : (this.state.edit ?
+                      <Formik
+                          initialValues={initialValues}
+                          validate={values => {
+                            let errors = {};
+                            if (values.name.length >= 15) {
+                              errors.name = 'The length of the name is too long.';
+                            } else if (values.name.length === 0 || values.name === '0') {
+                              errors.name = 'Please, type your name.';
+                            }
+                            return errors;
+                          }}
+                          onSubmit={(values) => {
+                            this.handleSubmit(values);
+                          }}
+                      >
+                        {({ isSubmitting, handleSubmit, handleChange, values, errors}) => (
+                            <UserForm onSubmit={handleSubmit}>
+                              <Label>
+                                {errors.name && <Text color="red">{errors.name}</Text>}
+                                <Input
+                                    type="text"
+                                    name="name"
+                                    value={values.name}
+                                    onChange={handleChange}
+                                    onSubmit={handleSubmit}
+                                    placeholder="Name"
+                                />
+                              </Label>
+                              <Button padding='55px'><Done type='button' onClick={(e) => handleSubmit(e)}/></Button>
+                            </UserForm>
+                        )}
+                      </Formik> : user.name)
+              }
+            </UserName>
+            {
+              this.state.edit
+                  ? ''
+                  : <Button><Edit onClick={event => this.handleEdit()}/></Button>
             }
-          </UserName>
+            {
+              this.state.edit
+                  ? <Button margin='25px'><Cancel onClick={event => this.handleCancel()}/></Button>
+                  : <Button><Delete onClick={event => this.handleDelete(user)}/></Button>
+            }
+          </UserWrapper>
           {
-            this.state.edit
-                ? ''
-                : <Button><Edit onClick={event => this.handleEdit()}/></Button>
+            this.state.deleteError ? <DeleteError> You can't delete registered user! </DeleteError> : ''
           }
-          {
-            this.state.edit
-                ? <Button margin='25px'><Cancel onClick={event => this.handleCancel()}/></Button>
-                : <Button><Delete onClick={event => this.handleDelete(user)}/></Button>
-          }
-        </UserWrapper>
-
+        </Wrapper>
     )
   }
 }

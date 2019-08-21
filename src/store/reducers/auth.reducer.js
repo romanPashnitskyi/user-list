@@ -11,6 +11,7 @@ const authReducer = (state = initialState, action) => {
     }
     case 'LOGIN_SUCCESS': {
       localStorage.setItem('token', action.payload.data.token);
+      localStorage.setItem('user', action.payload.data.user.name);
       return {
         ...state,
         redirectUrl: '/app',
@@ -23,6 +24,7 @@ const authReducer = (state = initialState, action) => {
     }
     case 'LOGOUT_REQUEST': {
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
       return {
         ...state,
         user: null,

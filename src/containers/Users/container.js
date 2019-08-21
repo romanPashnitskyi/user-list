@@ -5,6 +5,7 @@ import Users from '.';
 
 const mapStateToProps = (state) => {
   return {
+    authUser: localStorage.getItem('user'),
     users: state.users.users,
     loading: state.users.loading
   }
