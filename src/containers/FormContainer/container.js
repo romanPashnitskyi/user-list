@@ -4,7 +4,6 @@ import FormContainer from '.';
 
 const mapStateToProps = (state) => {
     return {
-        name: state.users.name,
         message: state.users.message
     }
 };

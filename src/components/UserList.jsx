@@ -10,14 +10,13 @@ const List = styled.li`
 class UserList extends Component {
 
   render() {
-    const { users, authUser, loading, deleteUser, getUsers, editUsers } = this.props;
+    const { users, loading, deleteUser, getUsers, editUsers } = this.props;
     return (
       <div>
         {
           users.map((user, index) =>
           <List key={user._id}>
-            <User authUser={authUser} users={users} user={user} loading={loading} getUsers={getUsers}
-                  deleteUser={deleteUser} editUsers={editUsers} />
+            <User users={users} user={user} loading={loading} getUsers={getUsers} deleteUser={deleteUser} editUsers={editUsers} />
           </List>
           )
         }

@@ -71,7 +71,7 @@ class User extends Component {
   }
 
   handleDelete = (user) =>  {
-    if (this.props.authUser !== user.name) {
+    if (!user.status) {
       this.props.deleteUser(user);
     } else {
       this.setState({

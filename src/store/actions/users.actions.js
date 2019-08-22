@@ -81,3 +81,10 @@ export const EditUserFailure = err => {
     payload: err
   };
 };
+
+export const UserStatusChanged = (name, status) => {
+  return {
+    type: 'USER_STATUS_CHANGED',
+    payload: {name, status}
+  };
+};

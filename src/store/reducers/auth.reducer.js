@@ -1,6 +1,5 @@
 const initialState = {
   redirectUrl: '',
-  user: null,
   id_token: ''
 };
 
@@ -15,8 +14,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         redirectUrl: '/app',
-        id_token: action.payload.data.token,
-        user: action.payload.data.user.name
+        id_token: action.payload.data.token
       };
     }
     case 'LOGIN_FAILURE': {

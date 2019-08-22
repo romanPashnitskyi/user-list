@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { disconnect } from '../../store/soccet.wrapper';
 
 import { Formik } from 'formik';
 import { Input, Button, Form } from '../../components/FormComponent';
@@ -13,6 +14,10 @@ const wrapperForm = {
 };
 
 class Login extends Component {
+
+    componentDidMount() {
+        disconnect();
+    }
 
     componentWillReceiveProps(nextProps) {
         if (this.props.redirectUrl !== nextProps.redirectUrl) {

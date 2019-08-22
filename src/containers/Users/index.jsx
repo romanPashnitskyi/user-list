@@ -4,7 +4,8 @@ import { Wrapper } from '../FormContainer';
 import UserList from '../../components/UserList';
 import Title from '../../components/Title';
 import {Button} from '../../components/FormComponent';
-import {connectSocket} from "../../store/soccet.wrapper";
+
+import {connectSocket} from '../../store/soccet.wrapper';
 
 class Users extends Component {
 
@@ -18,13 +19,12 @@ class Users extends Component {
     };
 
     render() {
-        const { users, authUser, getUsers, deleteUsers, editUsers, loading } = this.props;
+        const { users, getUsers, deleteUsers, editUsers, loading } = this.props;
         return (
             <Wrapper padding='80px'>
                 <Button width='70px' margin='160px' onClick={this.handleLogout}>Logout</Button>
                 <Title title='User List' />
-                <UserList getUsers={getUsers} users={users} authUser={authUser} loading={loading}
-                          deleteUser={deleteUsers} editUsers={editUsers}/>
+                <UserList getUsers={getUsers} users={users} loading={loading} deleteUser={deleteUsers} editUsers={editUsers}/>
             </Wrapper>
         );
     }

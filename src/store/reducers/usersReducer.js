@@ -1,6 +1,5 @@
 const initialState = {
   users: [],
-  name: '',
   error: null,
   message: null,
   loading: false
@@ -29,7 +28,6 @@ const usersReducer = (state = initialState, action) => {
     case 'ADD_USERS_SUCCESS':
       return {
         ...state,
-        name: action.payload.name,
         message: true
       };
     case 'ADD_USERS_FAILURE':
@@ -68,17 +66,16 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         error: action.payload
       };
-    case 'FETCH_DATA_FULFILLED':
-      return {
-        ...state,
-        name: action.payload.name,
-        message: action.payload.message
-      };
-    case 'FETCH_DATA_REJECTED':
-      return {
-        ...state,
-        error: action.payload.error
-      };
+    case 'USER_STATUS_CHANGED': {
+      let users = state.users;
+      let index = users.findIndex(u => u.name === action.payload.name);
+      if(index !== -1) {
+        users[index].status = action.payload.status;
+        return { ...state, users: [...users] };
+      } else {
+        return state;
+      }
+    }
     default:
       return state;
   }

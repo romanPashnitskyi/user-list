@@ -1,12 +1,18 @@
 import io from 'socket.io-client';
+import store from './createStore';
+import { AddUsersSuccess, UsersRequest, UserStatusChanged } from './actions/users.actions';
 
 export var socket = null;
 
 export const connectSocket = () => {
     socket = io.connect(`http://localhost:8081?token=${localStorage.getItem('token')}`);
-    console.dir(socket);
     socket.on('new user', data => {
-        console.dir('DATA', data)
+        store.dispatch(AddUsersSuccess(data.name));
+        store.dispatch(UsersRequest());
+    });
+    socket.on('status change', data => {
+        const newData = JSON.parse(data);
+        store.dispatch(UserStatusChanged(newData.name, newData.status));
     });
     // socket.on('disconnect', () => {
     //   if(localStorage.getItem('token') !== 'null') {
