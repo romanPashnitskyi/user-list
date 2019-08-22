@@ -14,7 +14,7 @@ class UserList extends Component {
     return (
       <div>
         {
-          users.map((user, index) =>
+          users.map(user =>
           <List key={user._id}>
             <User users={users} user={user} loading={loading} getUsers={getUsers} deleteUser={deleteUser} editUsers={editUsers} />
           </List>
