@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import User from './User';
 import styled from 'styled-components';
 
@@ -10,13 +10,14 @@ const List = styled.li`
 class UserList extends Component {
 
   render() {
-    const { users, loading, deleteUser, getUsers, editUsers } = this.props;
+    const { users, page, perPage, loading, getUsers, deleteUser, editUsers } = this.props;
     return (
       <div>
         {
           users.map(user =>
           <List key={user._id}>
-            <User users={users} user={user} loading={loading} getUsers={getUsers} deleteUser={deleteUser} editUsers={editUsers} />
+            <User user={user} page={page} perPage={perPage} loading={loading}
+                  getUsers={getUsers} deleteUser={deleteUser} editUsers={editUsers} />
           </List>
           )
         }

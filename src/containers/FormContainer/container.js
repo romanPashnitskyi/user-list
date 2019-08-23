@@ -4,6 +4,8 @@ import FormContainer from '.';
 
 const mapStateToProps = (state) => {
     return {
+        page: state.users.page,
+        perPage: state.users.perPage,
         message: state.users.message
     }
 };
@@ -11,7 +13,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         addUsers: (user) => dispatch(AddUsersRequest(user)),
-        getUsers: () => dispatch(UsersRequest())
+        getUsers: (page, perPage) => dispatch(UsersRequest(page, perPage))
     }
 };
 

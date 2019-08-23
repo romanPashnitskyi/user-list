@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export const getUsers = () =>
+export const getUsers = (payload) =>
     axios
-        .get(`http://localhost:8081/api/users`)
-        .then(res => res.data);
+        .get(`http://localhost:8081/api/users?page=${payload.page}&perPage=${payload.perPage}&order=asc&orderBy=name`)
+        .then(res => { return {res, payload}});
 
 export const addUsers = (user) =>
     axios

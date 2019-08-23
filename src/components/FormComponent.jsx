@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
-import {Formik} from 'formik';
+import { Formik } from 'formik';
 
 export const Form = styled.form`
   width: 250px;
@@ -41,16 +41,13 @@ export const Text = styled.p`
 `;
 
 class FormComponent extends Component {
+
     handleSubmit = (values) => {
         this.props.addUsers(values);
     };
 
     componentDidMount() {
-        this.props.getUsers();
-    }
-
-    componentDidUpdate() {
-        this.props.getUsers();
+        this.props.getUsers(this.props.page, this.props.perPage);
     }
 
     render() {
@@ -95,6 +92,6 @@ class FormComponent extends Component {
             </Formik>
         )
     }
-};
+}
 
 export default FormComponent;

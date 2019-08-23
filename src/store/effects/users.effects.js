@@ -4,9 +4,9 @@ import { UserFailure, UsersSuccess, AddUserFailure, AddUsersSuccess,
         } from '../actions/users.actions';
 import { getUsers, addUsers, deleteUsers, editUsers } from '../services/users.service';
 
-function* usersRequest() {
+function* usersRequest(request) {
   try {
-    const data = yield call(getUsers);
+    const data = yield call(getUsers, request.payload);
     yield put(UsersSuccess(data));
   } catch (err) {
     yield put(UserFailure(err));

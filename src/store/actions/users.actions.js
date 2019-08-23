@@ -1,7 +1,7 @@
-export const UsersRequest = () => {
+export const UsersRequest = (page, perPage) => {
   return {
     type: 'USERS_REQUEST',
-    payload: null
+    payload: {page, perPage}
   };
 };
 

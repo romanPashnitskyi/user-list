@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Title from '../../components/Title';
 import Message from '../../components/Message';
-import FormComponent from '../../components/FormComponent'
+import FormComponent from '../../components/FormComponent';
 
 export const Wrapper = styled.div`
     height: 20vh;
@@ -18,12 +18,11 @@ export const Wrapper = styled.div`
 class FormContainer extends Component {
 
   render() {
-    const { message } = this.props;
-    const { addUsers, getUsers } = this.props;
+    const { page, perPage, message, addUsers, getUsers } = this.props;
     return (
       <Wrapper padding='150px'>
         <Title title='Add User'/>
-        <FormComponent addUsers={addUsers} getUsers={getUsers}/>
+        <FormComponent addUsers={addUsers} getUsers={getUsers} page={page} perPage={perPage}/>
         <Message message={message}/>
       </Wrapper>
     );

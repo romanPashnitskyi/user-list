@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Edit, Delete, Done, Cancel } from '@material-ui/icons';
 
-import { Label, Text} from './FormComponent';
-import {Formik} from 'formik';
+import { Label, Text } from './FormComponent';
+import { Formik } from 'formik';
 
 const Wrapper = styled.div`
   width: 270px;
@@ -73,6 +73,9 @@ class User extends Component {
   handleDelete = (user) =>  {
     if (!user.status) {
       this.props.deleteUser(user);
+      setTimeout(() => {
+        this.props.getUsers(this.props.page, this.props.perPage);
+      }, 100);
     } else {
       this.setState({
         deleteError: true
@@ -91,7 +94,7 @@ class User extends Component {
     });
   };
 
-  handleSubmit(values) {
+  handleSubmitEdit = (values) => {
     this.props.editUsers(this.props.user._id, values.name);
     this.setState({edit: false});
   };
@@ -122,10 +125,10 @@ class User extends Component {
                             return errors;
                           }}
                           onSubmit={(values) => {
-                            this.handleSubmit(values);
+                            this.handleSubmitEdit(values);
                           }}
                       >
-                        {({ isSubmitting, handleSubmit, handleChange, values, errors}) => (
+                        {({ handleSubmit, handleChange, values, errors }) => (
                             <UserForm onSubmit={handleSubmit}>
                               <Label>
                                 {errors.name && <Text color="red">{errors.name}</Text>}

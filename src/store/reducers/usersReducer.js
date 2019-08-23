@@ -1,5 +1,8 @@
 const initialState = {
+  page: 1,
+  perPage: 5,
   users: [],
+  total: null,
   error: null,
   message: null,
   loading: false
@@ -14,7 +17,9 @@ const usersReducer = (state = initialState, action) => {
     case 'USERS_SUCCESS':
       return {
         ...state,
-        users: [...action.payload]
+        users: [...action.payload.res.data.users],
+        total: action.payload.res.data.total,
+        page: action.payload.payload.page
       };
     case 'USERS_FAILURE':
       return {
